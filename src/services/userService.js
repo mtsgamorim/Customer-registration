@@ -1,14 +1,28 @@
+import userRepository from "../repositories/userRepository.js";
+
 class UserService {
-  validateUser(cpf) {
-    const newCpf = this.cpfFormatter(cpf);
+  async createUser(data) {
+    const newCpf = this.cpfFormatter(data.cpf);
     const isValid = this.cpfValidator(newCpf);
+    const alreadyExist = await this.verifyCpfInBD(newCpf);
     if (!isValid) {
       return {
         message: "Invalid CPF",
         statusCode: 422,
       };
     }
-    this.verifyCpfInBD(newCpf);
+    if (alreadyExist) {
+      return {
+        message: "Customer already exists",
+        statusCode: 409,
+      };
+    }
+
+    userRepository.create({
+      name: data.name,
+      cpf: newCpf,
+      birthday: data.birthday,
+    });
   }
 
   cpfFormatter(cpf) {
@@ -56,8 +70,9 @@ class UserService {
     );
   }
 
-  verifyCpfInBD(cpf) {
-    // aqui verificarei se cpf ja existe no banco de dados
+  async verifyCpfInBD(cpf) {
+    const customer = await userRepository.findByCpf(cpf);
+    return !!customer;
   }
 }
 

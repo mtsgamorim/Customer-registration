@@ -1,8 +1,8 @@
-import prisma from "../database/prismaClient";
+import prisma from "../database/prismaClient.js";
 
 class UserRepository {
-  async create(body) {
-    await prisma.customers.create({ body });
+  async create(data) {
+    await prisma.customers.create({ data });
   }
 
   async findByCpf(cpf) {

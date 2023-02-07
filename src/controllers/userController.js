@@ -5,9 +5,9 @@ class UserController {
     this.createUser = this.createUser.bind(this);
   }
 
-  createUser(req, res) {
-    const cpf = req.body.cpf;
-    const validationError = UserService.validateUser(cpf);
+  async createUser(req, res) {
+    const data = req.body;
+    const validationError = await UserService.createUser(data);
     if (validationError) {
       res.status(validationError.statusCode).send(validationError.message);
     } else {
