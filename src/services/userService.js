@@ -48,6 +48,23 @@ class UserService {
     }
   }
 
+  async getUsers(page) {
+    if (!page) {
+      const data = await userRepository.findAll();
+      return data;
+    }
+    if ((page && page < 1) || isNaN(page)) {
+      return {
+        message: "Page not valid",
+        statusCode: 400,
+      };
+    }
+    const limit = 10;
+    const skip = (page - 1) * limit;
+    const data = await userRepository.findAllWithPage(limit, skip);
+    return data;
+  }
+
   verifyCpfFormat(cpf) {
     const cpfRegex = new RegExp(/^(\d{3}\.?\d{3}\.?\d{3}\-?\d{2})$/);
     return !!cpfRegex.test(cpf);

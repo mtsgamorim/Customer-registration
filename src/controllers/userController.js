@@ -4,6 +4,7 @@ class UserController {
   constructor() {
     this.createUser = this.createUser.bind(this);
     this.getUserByCpf = this.getUserByCpf.bind(this);
+    this.getAllUsers = this.getAllUsers.bind(this);
   }
 
   async createUser(req, res) {
@@ -12,7 +13,7 @@ class UserController {
     if (validationError) {
       res.status(validationError.statusCode).send(validationError.message);
     } else {
-      res.status(200).send("Created");
+      res.status(201).send("Created");
     }
   }
 
@@ -23,6 +24,16 @@ class UserController {
       res.status(data.statusCode).send(data.message);
     } else {
       res.status(data.statusCode).send(data.body);
+    }
+  }
+
+  async getAllUsers(req, res) {
+    const { page } = req.query;
+    const data = await UserService.getUsers(page);
+    if (data.message) {
+      res.status(data.statusCode).send(data.message);
+    } else {
+      res.status(200).send(data);
     }
   }
 }

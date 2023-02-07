@@ -14,6 +14,6 @@ userRouter.post(
 
 userRouter.get("/customer/:cpf", userController.getUserByCpf);
 
-userRouter.get("");
+userRouter.get("/allcustomers", userController.getAllUsers);
 
 export default userRouter;

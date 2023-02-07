@@ -13,6 +13,19 @@ class UserRepository {
     });
     return customers;
   }
+
+  async findAllWithPage(limit, skip) {
+    const customers = await prisma.customers.findMany({
+      skip,
+      take: limit,
+    });
+    return customers;
+  }
+
+  async findAll() {
+    const customers = await prisma.customers.findMany();
+    return customers;
+  }
 }
 
 export default new UserRepository();
