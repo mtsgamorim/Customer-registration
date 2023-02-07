@@ -7,12 +7,12 @@ const userRouter = Router();
 const userSchemaValidator = new SchemaValidator(userSchema);
 
 userRouter.post(
-  "/create",
+  "/customer",
   userSchemaValidator.validateSchema,
   userController.createUser
 );
 
-userRouter.get("");
+userRouter.get("/customer/:cpf", userController.getUserByCpf);
 
 userRouter.get("");
 

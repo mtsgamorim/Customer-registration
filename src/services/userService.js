@@ -25,6 +25,34 @@ class UserService {
     });
   }
 
+  async getUserByCpf(cpf) {
+    const validFormat = this.verifyCpfFormat(cpf);
+    if (!validFormat) {
+      return {
+        message: "Invalid CPF format",
+        statusCode: 422,
+      };
+    }
+    const newCpf = this.cpfFormatter(cpf);
+    const customer = await userRepository.findByCpf(newCpf);
+    if (customer) {
+      return {
+        body: customer,
+        statusCode: 200,
+      };
+    } else {
+      return {
+        message: "Customer not registred",
+        statusCode: 404,
+      };
+    }
+  }
+
+  verifyCpfFormat(cpf) {
+    const cpfRegex = new RegExp(/^(\d{3}\.?\d{3}\.?\d{3}\-?\d{2})$/);
+    return !!cpfRegex.test(cpf);
+  }
+
   cpfFormatter(cpf) {
     const newCpf = cpf.replace(/\D/g, "");
     return newCpf;
