@@ -21,9 +21,11 @@ class UserService {
     const secondVerifyDigit = Number(cpf[10]);
     let obrigatoryFirstDigit;
     let obrigatorySecondDigit;
+
     let modulus;
     let cont = 2;
     let sum = 0;
+
     for (let i = 8; i >= 0; i--) {
       sum += cpf[i] * cont;
       cont++;
@@ -34,6 +36,7 @@ class UserService {
     } else {
       obrigatoryFirstDigit = 11 - modulus;
     }
+
     sum = 0;
     cont = 2;
     for (let i = 9; i >= 0; i--) {
@@ -46,6 +49,7 @@ class UserService {
     } else {
       obrigatorySecondDigit = 11 - modulus;
     }
+
     return !!(
       firstVerifyDigit === obrigatoryFirstDigit &&
       secondVerifyDigit === obrigatorySecondDigit
