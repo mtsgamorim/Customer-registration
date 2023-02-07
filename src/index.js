@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import cors from "cors";
 import express, { json } from "express";
-import userRouter from "./routes/userRouter";
+import userRouter from "./routes/userRouter.js";
 
 class Server {
   constructor(port, app) {
