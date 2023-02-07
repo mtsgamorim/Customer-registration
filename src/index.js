@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import cors from "cors";
 import express, { json } from "express";
+import userRouter from "./routes/userRouter";
 
 class Server {
   constructor(port, app) {
@@ -11,6 +12,7 @@ class Server {
   configRouter() {
     this.app.use(cors());
     this.app.use(json());
+    this.app.use(userRouter);
   }
 
   listen() {
