@@ -6,8 +6,13 @@ class UserController {
   }
 
   createUser(req, res) {
-    UserService.validateUser(req.body.cpf);
-    res.status(200).send("Created");
+    const cpf = req.body.cpf;
+    const validationError = UserService.validateUser(cpf);
+    if (validationError) {
+      res.status(validationError.statusCode).send(validationError.message);
+    } else {
+      res.status(200).send("Created");
+    }
   }
 }
 
