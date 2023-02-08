@@ -14,6 +14,7 @@ Este projeto é uma API de cadastro de clientes que possui seu proprio sistema d
 ## :computer: Tecnologias e Conceitos
 
 - Javascript
+- Node.JS
 - Postgres com Prima
 - Jest
 - Express
