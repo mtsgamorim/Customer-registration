@@ -80,8 +80,22 @@ DATABASE_URL="postgres://postgres:senha@localhost:5432/meuBanco"
 PORT= 4000
 ```
 
+Agora, faça a migrate do seu banco de dados
+
+```
+    npm run build
+```
+
 Finalizado o processo, é só inicializar o servidor
 
 ```
 npm start
+```
+
+## 🏁 Fazendo os testes da aplicação
+
+Para rodar os testes da aplicação, basta rodar o comando no terminal
+
+```
+npm run test
 ```
