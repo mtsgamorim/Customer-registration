@@ -83,7 +83,7 @@ PORT= 4000
 Agora, faça a migrate do seu banco de dados
 
 ```
-    npm run build
+npm run build
 ```
 
 Finalizado o processo, é só inicializar o servidor
