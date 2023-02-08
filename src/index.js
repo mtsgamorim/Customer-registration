@@ -2,7 +2,7 @@ import chalk from "chalk";
 import cors from "cors";
 import express, { json } from "express";
 import userRouter from "./routes/userRouter.js";
-
+import dotenv from "dotenv";
 class Server {
   constructor(port, app) {
     this.port = port;
@@ -26,7 +26,9 @@ class Server {
   }
 }
 
-let server = new Server(5000, express());
+dotenv.config();
+const PORT = Number(process.env.PORT) || 5000;
+let server = new Server(PORT, express());
 
 server.configRouter();
 server.listen();
